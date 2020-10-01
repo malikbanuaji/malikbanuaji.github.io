@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./assets/js/jquery-3.5.1.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="./static/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/job.css" />
+    <title>Celestia Luna Job Passive Calculator</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="bg-dark p-5">
+        <h1 class="text-light">CL Job Passive Calculator</h1>
+        <p class="text-light" class="lead">
+          This example is a quick exercise to illustrate how the bottom navbar
+          works.
+        </p>
+      </div>
+      <div class="container">
+        <div class="d-flex justify-content-end py-4">
+          <button class="btn btn-outline-danger" onclick="resetAll()">
+            Reset
+          </button>
+        </div>
+        <div
+          class="row justify-content-center align-items-start py-4 border-top"
+        >
+          <div
+            class="d-flex justify-content-start align-items-center col-sm-6 col-lg-2"
+          >
+            <div>
+              <h3>Race:</h3>
+              <div class="form-check">
+                <input
+                  onchange="handleOnChangeRaceRadio(event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="race"
+                  value="human"
+                  id="human-radio"
+                />
+                <label class="form-check-label" for="human-radio">Human</label>
+              </div>
+              <div class="form-check">
+                <input
+                  onchange="handleOnChangeRaceRadio(event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="race"
+                  value="elf"
+                  id="elf-radio"
+                />
+                <label class="form-check-label" for="elf-radio">Elf</label>
+              </div>
+            </div>
+          </div>
+          <div
+            id="job-basic"
+            class="d-flex justify-content-start align-items-center col-sm-6 col-lg-2"
+          >
+            <div>
+              <h3>Basic:</h3>
+              <div class="form-check">
+                <input
+                  onchange="handleOnChangeJobRadio(event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="job"
+                  value="fighter"
+                  id="job-fighter-radio"
+                  disabled
+                />
+                <label class="form-check-label" for="job-fighter-radio"
+                  >Fighter</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  onchange="handleOnChangeJobRadio(event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="job"
+                  value="rogue"
+                  id="job-rogue-radio"
+                  disabled
+                />
+                <label class="form-check-label" for="job-rogue-radio"
+                  >Rogue</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  onchange="handleOnChangeJobRadio(event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="job"
+                  value="mage"
+                  id="job-mage-radio"
+                  disabled
+                />
+                <label class="form-check-label" for="job-mage-radio"
+                  >Mage</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="row justify-content-center align-items-start py-4 border-top"
+        >
+          <div
+            id="job-0"
+            class="d-flex justify-content-start align-items-start col-sm-6 col-md-3"
+          >
+            <div>
+              <h3>Level 20:</h3>
+              <div id="job-tree-0"></div>
+            </div>
+          </div>
+          <div
+            id="job-1"
+            class="d-flex justify-content-start align-items-center col-sm-6 col-md-3"
+          >
+            <div>
+              <h3>Level 40:</h3>
+              <div id="job-tree-1"></div>
+            </div>
+          </div>
+          <div
+            id="job-2"
+            class="d-flex justify-content-start align-items-center col-sm-6 col-md-3"
+          >
+            <div>
+              <h3>Level 75:</h3>
+              <div id="job-tree-2"></div>
+            </div>
+          </div>
+          <div
+            id="job-3"
+            class="d-flex justify-content-start align-items-center col-sm-6 col-md-3"
+          >
+            <div>
+              <h3>Level 105:</h3>
+              <div id="job-tree-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6 py-4 border-top">
+            <h3>Bonus Stats</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="bonus-stats"></tbody>
+            </table>
+          </div>
+          <div class="col-sm-12 col-lg-6 py-4 border-top">
+            <h3>Path Level</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Job</th>
+                  <th>Level</th>
+                </tr>
+              </thead>
+              <tbody id="path-level"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./static/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.js"></script>
+  <script src="./data/js/job.js"></script>
+  <script src="./data/js/label.js"></script>
+  <script src="./data/js/passive.js"></script>
+  <script>
+    let pathList = ["", "", "", ""];
+
+    function calculateBonusStats() {
+      let bonusStats = {};
+      let pathLevel = {};
+      for (let i = 0; i < pathList.length; i++) {
+        const item = pathList[i];
+        if (item.length > 0) {
+          pathLevel[pathList[i]] = (pathLevel[pathList[i]] ?? 0) + 1;
+        }
+      }
+      for ([key, value] of Object.entries(pathLevel)) {
+        for ([skillName, skillValue] of Object.entries(
+          passive[key][value - 1]
+        )) {
+          if (typeof bonusStats[skillName] !== "undefined") {
+            bonusStats[skillName] = bonusStats[skillName] + skillValue;
+          } else {
+            bonusStats[skillName] = skillValue;
+          }
+        }
+      }
+      console.log(pathLevel);
+      console.log(bonusStats);
+      const bonusStatsElement = document.getElementById("bonus-stats");
+      bonusStatsElement.innerText = "";
+      for ([key, value] of Object.entries(bonusStats)) {
+        createBonusStats(bonusStatsElement, key, value);
+      }
+
+      const pathLevelElement = document.getElementById("path-level");
+      pathLevelElement.innerText = "";
+      for ([key, value] of Object.entries(pathLevel)) {
+        createPathLevel(pathLevelElement, key, value);
+      }
+    }
+
+    function createBonusStats(parent, key, value) {
+      const row = document.createElement("tr");
+      const labelCol = document.createElement("td");
+      labelCol.innerHTML = `<b>${label[key].name}</b>`;
+
+      const valueCol = document.createElement("td");
+      valueCol.innerText = `${value} ${label[key].type}`;
+      row.append(labelCol);
+      row.append(valueCol);
+
+      parent.append(row);
+    }
+
+    function createPathLevel(parent, key, value) {
+      const basicJob = document
+        .querySelector('input[name="job"]:checked')
+        .getAttribute("value");
+
+      const row = document.createElement("tr");
+      const labelCol = document.createElement("td");
+      labelCol.innerHTML = `<b>${Job.jobChangePath[basicJob][key].name}</b>`;
+
+      const valueCol = document.createElement("td");
+      valueCol.innerText = `${value}`;
+      row.append(labelCol);
+      row.append(valueCol);
+
+      parent.append(row);
+    }
+
+    function handleJobChange(event) {
+      const [jobLevel, pathTaken] = event.target.value.split("-");
+      const i = Number(jobLevel);
+      pathList[i] = pathTaken;
+      calculateBonusStats();
+    }
+
+    function _createElementJobTree(jobTree, minimumLevelIndex, race, data) {
+      const parent = document.createElement("div");
+      parent.setAttribute("class", "form-check");
+      const childId = `job-tree-${data.id}-radio`;
+      const child = document.createElement("input");
+      child.setAttribute("onChange", "handleJobChange(event)");
+      child.setAttribute("class", "form-check-input");
+      child.setAttribute("type", "radio");
+      child.setAttribute("name", `job-${minimumLevelIndex}`);
+      child.setAttribute("value", `${minimumLevelIndex}-${data.passive}`);
+      child.setAttribute("id", childId);
+
+      // <label class="form-check-label" for="job-rogue-radio">Rogue</label>
+      const label = document.createElement("label");
+      label.setAttribute("class", "form-check-label");
+      label.setAttribute("for", childId);
+      label.innerText = data.name;
+
+      parent.appendChild(child);
+      parent.appendChild(label);
+      jobTree.append(parent);
+    }
+
+    function createRadioJobTreeFor() {
+      const race = document
+        .querySelector('input[name="race"]:checked')
+        .getAttribute("value");
+      const basicJob = document
+        .querySelector('input[name="job"]:checked')
+        .getAttribute("value");
+
+      for (let i = 0; i < Job.jobChangeLevel.length; i++) {
+        const elementId = `job-tree-${i}`;
+        const jobTree = document.getElementById(elementId);
+        jobTree.innerHTML = "";
+
+        for (const [key, value] of Object.entries(
+          Job.jobChangePath[basicJob]
+        )) {
+          if (value.minimum_level == i) {
+            if (value.race == "all" || value.race == race) {
+              _createElementJobTree(jobTree, i, race, {
+                id: key,
+                ...value,
+              });
+            }
+          }
+        }
+      }
+    }
+    function handleOnChangeRaceRadio(event) {
+      clearAllRace();
+      document.getElementById("job-fighter-radio").removeAttribute("disabled");
+      document.getElementById("job-rogue-radio").removeAttribute("disabled");
+      document.getElementById("job-mage-radio").removeAttribute("disabled");
+      event.preventDefault();
+    }
+    function handleOnChangeJobRadio(event) {
+      clearAllJob();
+      event.preventDefault();
+      createRadioJobTreeFor(0);
+    }
+    function clearAllRace() {
+      clearAllJob();
+      const jobRadio = document.querySelectorAll('input[name="job"]');
+      for (let i = 0; i < jobRadio.length; i++) {
+        jobRadio.item(i).checked = false;
+      }
+    }
+    function clearAllJob() {
+      for (let i = 0; i < Job.jobChangeLevel.length; i++) {
+        document.getElementById(`job-tree-${i}`).innerHTML = "";
+      }
+      document.getElementById("bonus-stats").innerText = "";
+      pathList = ["", "", "", ""];
+    }
+
+    function resetAll() {
+      clearAllRace();
+      clearAllJob();
+      const raceRadio = document.querySelectorAll('input[name="race"]');
+      for (let i = 0; i < raceRadio.length; i++) {
+        raceRadio.item(i).checked = false;
+      }
+      // document
+      //   .getElementById("job-fighter-radio")
+      //   .setAttribute("disabled", true);
+      // document.getElementById("job-mage-radio").setAttribute("disabled", true);
+      // document.getElementById("job-rogue-radio").setAttribute("disabled", true);
+      pathList = ["", "", "", ""];
+    }
+  </script>
+</html>

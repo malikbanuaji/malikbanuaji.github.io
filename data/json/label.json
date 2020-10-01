@@ -1,0 +1,26 @@
+{
+  "physical_attack": {
+    "name": "Physical Attack",
+    "type": "%"
+  },
+  "physical_defence": {
+    "name": "Physical Defence",
+    "type": "%"
+  },
+  "critical_rate": {
+    "name": "Critical Rate",
+    "type": ""
+  },
+  "critical_damage": {
+    "name": "Critical Damage",
+    "type": "%"
+  },
+  "magical_attack": {
+    "name": "Magical Attack",
+    "type": "%"
+  },
+  "magical_defence": {
+    "name": "Magical Defence",
+    "type": "%"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "paladin": [
+    {
+      "physical_defence": 1
+    },
+    {
+      "physical_defence": 3
+    },
+    {
+      "physical_defence": 8
+    },
+    {
+      "physical_defence": 15
+    }
+  ],
+  "swordmaster": [
+    {
+      "physical_attack": 1
+    },
+    {
+      "physical_attack": 3
+    },
+    {
+      "physical_attack": 8
+    },
+    {
+      "physical_attack": 15
+    }
+  ],
+  "destroyer": [
+    {
+      "physical_attack": 2,
+      "critical_damage": 2
+    },
+    {
+      "physical_attack": 5,
+      "critical_damage": 5
+    },
+    {
+      "physical_attack": 10,
+      "critical_damage": 9
+    }
+  ],
+  "magnus": [
+    {
+      "physical_defence": 2,
+      "physical_attack": 2
+    },
+    {
+      "physical_defence": 6,
+      "physical_attack": 5
+    }
+  ],
+  "panzer": [
+    {
+      "physical_attack": 3,
+      "critical_rate": 50
+    }
+  ],
+  "crusader": [
+    {
+      "physical_defence": 3,
+      "magical_attack": 5
+    }
+  ]
+}

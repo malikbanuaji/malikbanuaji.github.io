@@ -1,0 +1,94 @@
+{
+  "fighter": {
+    "guard": {
+      "name": "Guard",
+      "passive": "paladin",
+      "minimum_level": 20,
+      "race": "all"
+    },
+    "warrior": {
+      "name": "Warrior",
+      "passive": "swordmaster",
+      "minimum_level": 20,
+      "race": "all"
+    },
+    "infantryman": {
+      "name": "Infantryman",
+      "passive": "paladin",
+      "minimum_level": 40,
+      "race": "all"
+    },
+    "swordsman": {
+      "name": "Swordsman",
+      "passive": "swordmaster",
+      "minimum_level": 40,
+      "race": "all"
+    },
+    "mercenary": {
+      "name": "Mercenary",
+      "passive": "destroyer",
+      "minimum_level": 40,
+      "race": "human"
+    },
+    "phalanx": {
+      "name": "Phalanx",
+      "passive": "paladin",
+      "minimum_level": 75,
+      "race": "all"
+    },
+    "knight": {
+      "name": "Knight",
+      "passive": "swordmaster",
+      "minimum_level": 75,
+      "race": "all"
+    },
+    "gladiator": {
+      "name": "Gladiator",
+      "passive": "destroyer",
+      "minimum_level": 75,
+      "race": "human"
+    },
+    "runeknight": {
+      "name": "Rune Knight",
+      "passive": "magnus",
+      "minimum_level": 75,
+      "race": "elf"
+    },
+    "paladin": {
+      "name": "Paladin",
+      "passive": "paladin",
+      "minimum_level": 105,
+      "race": "all"
+    },
+    "swordmaster": {
+      "name": "Sword Master",
+      "passive": "swordmaster",
+      "minimum_level": 105,
+      "race": "all"
+    },
+    "destroyer": {
+      "name": "Destroyer",
+      "passive": "destroyer",
+      "minimum_level": 105,
+      "race": "human"
+    },
+    "magnus": {
+      "name": "Magnus",
+      "passive": "magnus",
+      "minimum_level": 105,
+      "race": "elf"
+    },
+    "panzer": {
+      "name": "Panzer",
+      "passive": "panzer",
+      "minimum_level": 105,
+      "race": "all"
+    },
+    "crusader": {
+      "name": "Crusader",
+      "passive": "crusader",
+      "minimum_level": 105,
+      "race": "all"
+    }
+  }
+}
